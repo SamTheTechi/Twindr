@@ -1,0 +1,33 @@
+{
+  "name": "twindr",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.2.8",
+  "workspaces": [
+    "apps/*",
+    "server/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "turbo": "^2.5.0",
+    "prettier": "^3.5.3",
+    "typescript": "5.8.2"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.744.0",
+    "@grpc/grpc-js": "^1.13.2",
+    "@grpc/proto-loader": "^0.7.13",
+    "hono": "^4.7.5"
+  }
+}
