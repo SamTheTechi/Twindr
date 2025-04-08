@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package auth.v1;
+
+service AuthService {
+  rpc SigninUsingContact(SigninUsingContactRequest) returns (AuthServiceResponse) {}
+  rpc Login(AuthServiceResponse) returns (AuthServiceResponse) {}
+}
+
+message SigninUsingContactRequest {
+  int32 contact = 1;
+}
+
+message AuthServiceResponse {
+  string jwt = 1;
+}

@@ -1,0 +1,21 @@
+login 
+    google 
+    facebook 
+    contact number
+
+profile
+  name
+  age
+  gender
+  sex prefrences
+  location range
+  bio
+    drink
+    smoke
+    workout
+    communication style
+    love style? \\ TF
+    education
+    zodiac??
+    hobbies []
+    photos

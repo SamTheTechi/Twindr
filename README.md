@@ -1,7 +1,11 @@
+
+![Flow Chart](flowChart.png)
+
 # 🧠 Twindr
 
 A monorepo for super scalable dating application.
 Includes multiple microservices utlising gRPC, Rest, SNS+SQS, GraphQL.
+
 
 ## 📁 Monorepo Structure
 
