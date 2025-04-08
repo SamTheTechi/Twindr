@@ -4,16 +4,15 @@
 # 🧠 Twindr
 
 A monorepo for super scalable dating application.
-Includes multiple microservices utlising gRPC, Rest, SNS+SQS, GraphQL.
+Includes multiple microservices utlising gRPC, Rest, SNS+SQS.
 
 
 ## 📁 Monorepo Structure
 
 ```
 .
-├── Apps              # Frontend apps
+├── Apps              # Frontend app
 ├────── Next
-├────── Expo
 ├── Server            # Backend microservices
 ├────── Auth
 ├────── Gateway
@@ -39,13 +38,13 @@ bun install
 ### 2. Start all dev servers
 
 ```bash
-bun run dev
+bun turbo run dev
 ```
 
 ### 3. Build everything
 
 ```bash
-bun run build
+bun tubro run build
 ```
 
 Stay isolated, stay clean ✨
