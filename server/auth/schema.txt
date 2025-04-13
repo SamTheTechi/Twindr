@@ -1,0 +1,13 @@
+const data = {
+  user_id: "something something...",
+  login: [
+    {
+      type: "phone",
+      value: "911xxxxx81",
+    },
+    {
+      type: "google",
+      value: "something....",
+    }
+  ]
+}

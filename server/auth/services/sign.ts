@@ -1,22 +1,15 @@
 import type { JwtVariables } from "hono/jwt";
 import type { Password } from "bun";
+import { BloomFilter } from "../../../packages/bloomfilters/bloom"
 import { jwt } from "hono/jwt";
-import { password } from "bun";
+import { password, env } from "bun";
 
-const data = {
-  user_id: "something something...",
-  login: [
-    {
-      type: "phone",
-      value: "911xxxxx81",
-    },
-    {
-      type: "google",
-      value: "something....",
+export const SignUp = async (contact: number) => {
+  try {
+    if (!contact) {
+      return
     }
-  ]
-}
+  } catch (error) {
 
-export const SignupUsingContact = async (contact: number) => {
-
+  }
 }

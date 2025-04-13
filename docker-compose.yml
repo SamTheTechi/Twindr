@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: Postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sysAdmin
+      POSTGRES_PASSWORD: sam
+      POSTGRES_DB: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    shm_size: 512mb
+
+  redis:
+    image: redis:latest
+    container_name: Redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  mongo:
+    image: mongo:latest
+    container_name: MongoDB
+    restart: unless-stopped
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: sysAdmin
+      MONGO_INITDB_ROOT_PASSWORD: sam
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+
+volumes:
+  pgdata:
+  mongodata:
