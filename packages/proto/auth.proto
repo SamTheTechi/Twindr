@@ -3,14 +3,25 @@ syntax = "proto3";
 package auth.v1;
 
 service AuthService {
-  rpc SigninUsingContact(SigninUsingContactRequest) returns (AuthServiceResponse) {}
-  rpc Login(AuthServiceResponse) returns (AuthServiceResponse) {}
+  rpc SignUp(SignUpRequest) returns (AuthServiceResponse);
+  rpc Login(LoginRequest) returns (AuthServiceResponse);
+  rpc Delete(DeleteRequest) returns (EmptyResponse);
 }
 
-message SigninUsingContactRequest {
+message SignUpRequest {
   int32 contact = 1;
 }
 
+message LoginRequest {
+  int32 contact = 1;
+}
+
+message DeleteRequest {
+  int32 contact = 1;
+}
+
+message EmptyResponse {}
+
 message AuthServiceResponse {
-  string jwt = 1;
+  string token = 1;
 }

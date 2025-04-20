@@ -28,6 +28,10 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 .cache
 *.tsbuildinfo
 
+# public and private keys
+*.key
+
+
 # IntelliJ based IDEs
 .idea
 
