@@ -7,4 +7,4 @@ export const pgClient = new Client({
   port: 5432
 })
 
-pg.connect();
+pgClient.connect();

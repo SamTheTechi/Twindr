@@ -13,27 +13,42 @@ export const Login = async (
       return [HttpStatus.BAD_REQUEST, null]
     }
 
-    const checkBloomFilter: string = String(contact);
-    if (!bloomFilter.check(checkBloomFilter)) {
-      const result = await pgClient.query("SELECT id FROM users WHERE contact = $1", [contact]);
-      if (result.rows.length === 0) {
-        return [HttpStatus.NOT_FOUND, null];
+    const contactStr = String(contact);
+    let userId: string | null = null;
+
+    if (bloomFilter.check(contactStr)) {
+      const cacheUserId = await redisClient.get(contactStr);
+      if (cacheUserId) {
+        userId = cacheUserId;
+      } else {
+        const result = await pgClient.query(
+          "SELECT id FROM users WHERE contact = $1",
+          [contact]
+        );
+        if (result.rows.length === 0) {
+          return [HttpStatus.NOT_FOUND, null];
+        }
+        userId = result.rows[0].id;
+        await redisClient.set(contactStr, userId as string);
       }
-      bloomFilter.add(checkBloomFilter);
     } else {
-      const result = await pgClient.query("SELECT id FROM users WHERE contact = $1", [contact]);
+      const result = await pgClient.query(
+        "SELECT id FROM users WHERE contact = $1",
+        [contact]
+      );
       if (result.rows.length === 0) {
         return [HttpStatus.NOT_FOUND, null];
       }
+      userId = result.rows[0].id;
+
+      bloomFilter.add(contactStr);
+      await redisClient.set(contactStr, userId as string);
     }
 
-    console.log(result)
-    const userId = result.rows[0].id
+    const privateKey = await loadKey("private.key");
+    const token: string = await sign({ userId }, privateKey, "RS256");
 
-    const loadPrivateKey = await loadKey("private.key")
-    const token: string = await sign({ userId }, loadPrivateKey, "RS256")
-
-    return [HttpStatus.CREATED, token]
+    return [HttpStatus.OK, token];
   } catch (error) {
     console.log(error)
     return [HttpStatus.INTERNAL_SERVER_ERROR, null]

@@ -11,24 +11,33 @@ export const SignUp = async (
 ): Promise<[number, string | null]> => {
   try {
     if (!contact) {
-      return [HttpStatus.BAD_REQUEST, null]
+      return [HttpStatus.BAD_REQUEST, null];
     }
 
-    const checkBloomFilter: string = String(contact);
+    const contactStr: string = String(contact);
 
-    if (!bloomFilter.check(checkBloomFilter)) {
+    if (bloomFilter.check(contactStr)) {
 
-      const result = await pgClient.query(
-        "SELECT id FROM users WHERE contact = $1",
-        [contact]
-      );
-      if (result.rows.length > 0) {
+      const checkCache = await redisClient.get(contactStr);
 
-        bloomFilter.add(checkBloomFilter)
-        return [HttpStatus.CONFLICT, null]
+      if (checkCache) {
+        bloomFilter.add(contactStr);
+        return [HttpStatus.CONFLICT, null];
+
+      }
+      else {
+        const result = await pgClient.query(
+          "SELECT id FROM users WHERE contact = $1",
+          [contact]
+        );
+        if (result.rows.length > 0) {
+          bloomFilter.add(contactStr)
+          return [HttpStatus.CONFLICT, null]
+        }
       }
     }
 
+    // creatino process
     const id = generateUID(contact);
 
     const useInsert = await pgClient.query(
@@ -37,16 +46,13 @@ export const SignUp = async (
     );
 
     const userId = useInsert.rows[0].id;
+    redisClient.set(contactStr, userId);
+    bloomFilter.add(contactStr);
 
-    bloomFilter.add(checkBloomFilter)
-
-    const payload = {
-      userId,
-    }
-
-
-    const loadPrivateKey = await loadKey("private.key")
-    const token: string = await sign(payload, loadPrivateKey, "RS256")
+    // sign token
+    const payload = { userId }
+    const privateKey = await loadKey("private.key");
+    const token: string = await sign(payload, privateKey, "RS256");
 
     return [HttpStatus.CREATED, token]
   } catch (error) {

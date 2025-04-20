@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package profile.v1;
+
+service ProfileService {
+  rpc GetProfile(GetProfileRequest) returns (GetProfileResponse);
+  rpc SetProfile(SetProfileRequest) returns (SetProfileResponse);
+  rpc PatchProfile(PatchProfileRequest) returns (PatchProfileResponse);
+}
+
+message Bio {
+  bool drink = 1;
+  bool smoke = 2;
+  string workout = 3;
+  string relation_type = 4;
+  string education = 5;
+  repeated string interests = 6;
+  repeated string photos = 7;
+}
+
+message Profile {
+  string id = 1;
+  string name = 2;
+  string age = 3;
+  string gender = 4;
+  Bio bio = 5;
+  string created_at = 6;
+}
+
+message GetProfileRequest {
+  string id = 1;
+}
+
+message GetProfileResponse {
+  Profile profile = 1;
+}
+
+message SetProfileRequest {
+  string name = 1;
+  string age = 2;
+  string gender = 3;
+  Bio bio = 4;
+}
+
+message SetProfileResponse {
+  Profile profile = 1;
+}
+
+message PatchProfileRequest {
+  string id = 1;
+  string name = 2;
+  string age = 3;
+  string gender = 4;
+  Bio bio = 5;
+}
+
+message PatchProfileResponse {
+  Profile profile = 1;
+}
