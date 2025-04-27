@@ -1,20 +1,20 @@
 import type { Context } from "hono";
 import type { ServiceError } from "@grpc/grpc-js";
-import { type SetProfile, SetProfileSchema } from "core/profile/validator/setProfile";
+import { PatchProfileSchema, type PatchProfile } from "core/profile/validator/patchProfile";
 import { client } from "core/profile/grpc"
 
-export const setProfile = async (c: Context) => {
+export const patchProfile = async (c: Context) => {
   try {
     const body = await c.req.json()
-    const parsed = SetProfileSchema.safeParse(body)
+    const parsed = PatchProfileSchema.safeParse(body);
 
     if (!parsed.success) {
-      return c.json({ msg: "invalide type" })
+      return c.json({ msg: "invalid parameters" })
     }
 
-    const profile: SetProfile = parsed.data;
+    const profile: PatchProfile = parsed.data;
     const response = await new Promise<any>((resolve, reject) => {
-      client.SetProfile(profile, (err: ServiceError, response: any) => {
+      client.PatchProfile(profile, (err: ServiceError, response: any) => {
         if (err) {
           reject(err)
         } else {
@@ -22,11 +22,13 @@ export const setProfile = async (c: Context) => {
         }
       });
     })
+
     return c.json({ msg: `profile added ${response}` })
   } catch (err: any) {
     console.log(err)
     return c.json({ msg: "Something went wrong" })
   }
 };
+
 
 

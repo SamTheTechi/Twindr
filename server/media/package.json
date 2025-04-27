@@ -1,5 +1,5 @@
 {
-  "name": "logging",
+  "name": "media",
   "version": "0.1.0",
   "scripts": {
     "dev": "bun --hot run index.ts",

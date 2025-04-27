@@ -8,11 +8,13 @@ service ProfileService {
   rpc PatchProfile(PatchProfileRequest) returns (PatchProfileResponse);
 }
 
+message EmptyResponse {}
+
 message Bio {
   bool drink = 1;
   bool smoke = 2;
   string workout = 3;
-  string relation_type = 4;
+  string relationType = 4;
   string education = 5;
   repeated string interests = 6;
   repeated string photos = 7;
@@ -22,9 +24,9 @@ message Profile {
   string id = 1;
   string name = 2;
   string age = 3;
-  string gender = 4;
-  Bio bio = 5;
-  string created_at = 6;
+  string contact = 4;
+  string gender = 5;
+  Bio bio = 6;
 }
 
 message GetProfileRequest {
@@ -38,8 +40,9 @@ message GetProfileResponse {
 message SetProfileRequest {
   string name = 1;
   string age = 2;
-  string gender = 3;
-  Bio bio = 4;
+  string contact = 3;
+  string gender = 4;
+  Bio bio = 5;
 }
 
 message SetProfileResponse {
@@ -47,11 +50,13 @@ message SetProfileResponse {
 }
 
 message PatchProfileRequest {
-  string id = 1;
-  string name = 2;
-  string age = 3;
-  string gender = 4;
-  Bio bio = 5;
+  bool drink = 1;
+  bool smoke = 2;
+  string workout = 3;
+  string relationType = 4;
+  string education = 5;
+  repeated string interests = 6;
+  repeated string photos = 7;
 }
 
 message PatchProfileResponse {

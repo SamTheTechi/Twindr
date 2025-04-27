@@ -4,7 +4,7 @@
 # 🧠 Twindr
 
 A monorepo for super scalable dating application.
-Includes multiple microservices utlising gRPC, Rest, SNS+SQS.
+Includes multiple microservices utlising gRPC, Rest, RabbitMQ, Docker
 
 
 ## 📁 Monorepo Structure
@@ -17,12 +17,16 @@ Includes multiple microservices utlising gRPC, Rest, SNS+SQS.
 ├────── Auth
 ├────── Gateway
 ├────── Matching
+├────── Media
 ├────── Messaging
 ├────── Notification
 ├────── Profile
 ├────── Recommendation
 ├── Packages          # Shared code
 ├────── Proto
+├────── Sql
+├────── Bloomfilters
+├────── StatusCodes
 ├── package.json
 └── turbo.json
 ```

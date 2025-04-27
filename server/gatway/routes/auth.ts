@@ -1,12 +1,12 @@
 import { Hono } from "hono";
-import { SignInUser } from "controller/auth/signin";
-import { LoginUser } from "controller/auth/login";
-import { DeleteUser } from "controller/auth/delete";
+import { signInUser } from "controller/auth/signin";
+import { loginUser } from "controller/auth/login";
+import { deleteUser } from "controller/auth/delete";
 
 export const Auth = new Hono();
 
-Auth.post('/signup', SignInUser);
-Auth.post('/login', LoginUser);
-Auth.post('/delete', DeleteUser);
+Auth.post('/signup', signInUser);
+Auth.post('/login', loginUser);
+Auth.post('/delete', deleteUser);
 
 

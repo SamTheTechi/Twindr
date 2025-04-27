@@ -29,15 +29,26 @@ services:
       - pgdata_matching:/var/lib/postgresql/data
     shm_size: 256mb
 
-  redis:
+  redis_auth:
     image: redis:latest
-    container_name: Redis
+    container_name: RedisAuth
     restart: unless-stopped
     ports:
       - "6379:6379"
     command: > 
       redis-server
-      -- maxmemory 100mb
+      -- maxmemory 50mb
+      -- maxmemory-policy allkeys-lru
+
+  redis_profile:
+    image: redis:latest
+    container_name: RedisProfile
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    command: > 
+      redis-server
+      -- maxmemory 250mb
       -- maxmemory-policy allkeys-lru
 
   rabbitmq: 

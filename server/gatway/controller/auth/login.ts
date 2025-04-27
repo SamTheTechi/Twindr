@@ -1,12 +1,18 @@
 import type { ServiceError } from "@grpc/grpc-js"
 import type { Context } from "hono";
+import { LoginSchema, type Login } from "core/auth/validator/login";
 import { client } from "core/auth/grpc"
 
-export const LoginUser = async (c: Context) => {
+export const loginUser = async (c: Context) => {
   try {
-    const { contact } = await c.req.json()
+    const body = await c.req.json();
+    const parsed = LoginSchema.safeParse(body);
+    if (!parsed.success) {
+      return c.json({ msg: "invalide parameters" })
+    }
+    const contact: Login = parsed.data;
     const response = await new Promise<{ token: string }>((resolve, reject) => {
-      client.Login({ contact: contact }, (err: ServiceError, response: any) => {
+      client.Login(contact, (err: ServiceError, response: any) => {
         if (err) {
           reject(err)
         } else {

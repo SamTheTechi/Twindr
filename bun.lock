@@ -7,7 +7,6 @@
         "@aws-sdk/client-s3": "^3.744.0",
         "@grpc/grpc-js": "^1.13.2",
         "@grpc/proto-loader": "^0.7.13",
-        "@types/amqplib": "^0.10.7",
         "amqplib": "^0.10.7",
         "google-auth-library": "^9.15.1",
         "hono": "^4.7.5",
@@ -19,9 +18,11 @@
         "pg": "^8.14.1",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
+        "zod": "^3.24.3",
       },
       "devDependencies": {
         "@tailwindcss/postcss": "^4",
+        "@types/amqplib": "^0.10.7",
         "@types/bun": "latest",
         "@types/nanoid": "^3.0.0",
         "@types/node": "^20",
@@ -683,6 +684,8 @@
     "yargs": ["yargs@17.7.2", "", { "dependencies": { "cliui": "^8.0.1", "escalade": "^3.1.1", "get-caller-file": "^2.0.5", "require-directory": "^2.1.1", "string-width": "^4.2.3", "y18n": "^5.0.5", "yargs-parser": "^21.1.1" } }, "sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w=="],
 
     "yargs-parser": ["yargs-parser@21.1.1", "", {}, "sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw=="],
+
+    "zod": ["zod@3.24.3", "", {}, "sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg=="],
 
     "@aws-crypto/sha1-browser/@smithy/util-utf8": ["@smithy/util-utf8@2.3.0", "", { "dependencies": { "@smithy/util-buffer-from": "^2.2.0", "tslib": "^2.6.2" } }, "sha512-R8Rdn8Hy72KKcebgLiv8jQcQkXoLMOGGv5uI1/k0l+snqkOzQ1R0ChUBCxWMlBsFMekWjq0wRudIweFs7sKT5A=="],
 

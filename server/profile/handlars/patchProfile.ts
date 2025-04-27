@@ -1,16 +1,16 @@
-import { SetProfile } from "services/setProfile"
-import type { SetProfileRequest, SetProfileResponse } from "core/types/setProfile";
+import type { PatchProfileRequest, PatchProfileResponse } from "core/types/patchProfile";
+import { PatchProfile } from "services/patchProfile"
 import { type ServerUnaryCall, type sendUnaryData, status } from "@grpc/grpc-js"
 import { HttpStatus } from "@packages/statusCodes/status";
 
-export const setProfile = async (
-  call: ServerUnaryCall<SetProfileRequest, SetProfileResponse>,
-  callback: sendUnaryData<SetProfileResponse>
+export const patchProfile = async (
+  call: ServerUnaryCall<PatchProfileRequest, PatchProfileResponse>,
+  callback: sendUnaryData<PatchProfileResponse>
 ) => {
 
   try {
     const request = call.request;
-    console.log(request)
+    console.log(request) // here
 
     return callback({});
 
